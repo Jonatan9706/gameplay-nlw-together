@@ -18,6 +18,7 @@ import { COLLECTION_APPOINTMENTS } from "../../config/database";
 export function Home() {
   const [category, setCategory] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+  
   const [appointments, setAppointments] = useState<AppointmentProps[]>([]);
 
   const navigation = useNavigation();
@@ -52,41 +53,43 @@ export function Home() {
   }, [category]))
 
   return (
-    <Background>
-      <View style={styles.header}>
-        <Profile />
-        <ButtonAdd onPress={ handleAppointmentCreate }/>
-      </View>
-        <CategorySelect
-          categorySelected={category}
-          setCategory={handleCategorySelect}
-          hasCheckBox={true}
-        />
-      
-      {
-        loading ? <Load/> :
-        <>
-          <ListHeader
-            title="Partidas agendadas"
-            subtitle={`Total ${appointments.length}`}
+    <>
+      <Background>
+        <View style={styles.header}>
+          <Profile />
+          <ButtonAdd onPress={ handleAppointmentCreate }/>
+        </View>
+          <CategorySelect
+            categorySelected={category}
+            setCategory={handleCategorySelect}
+            hasCheckBox={true}
           />
-
-          <FlatList
-            data={appointments}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              <Appointment
-                data={item}
-                onPress={() => handleAppointmentDetails(item)}
-              />
-            )}
-            ItemSeparatorComponent={() => <ListDivider />}
-            contentContainerStyle={{ paddingBottom: 69 }}
-            style={styles.matches}
-            showsVerticalScrollIndicator={false}
+        
+        {
+          loading ? <Load/> :
+          <>
+            <ListHeader
+              title="Partidas agendadas"
+              subtitle={`Total ${appointments.length}`}
             />
-        </>
-      }
-    </Background>
+
+            <FlatList
+              data={appointments}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => (
+                <Appointment
+                  data={item}
+                  onPress={() => handleAppointmentDetails(item)}
+                />
+              )}
+              ItemSeparatorComponent={() => <ListDivider />}
+              contentContainerStyle={{ paddingBottom: 69 }}
+              style={styles.matches}
+              showsVerticalScrollIndicator={false}
+              />
+          </>
+        }
+      </Background>
+    </>
   );
 }

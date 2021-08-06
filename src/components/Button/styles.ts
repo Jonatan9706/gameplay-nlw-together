@@ -10,6 +10,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  medium: {
+    width: '40%',
+    height: 56,
+    borderRadius: 8,
+    backgroundColor: theme.colors.primary,
+    flexDirection: 'row',
+    alignItems:'center',
+  },
+  outline: {
+  },
   title: {
     flex: 1,
     fontFamily: theme.fonts.text500,

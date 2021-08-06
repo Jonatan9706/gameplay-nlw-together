@@ -6,12 +6,14 @@ import { styles } from './styles';
 
 type ButtonIconProps = RectButtonProps & {
   title: string
+  outline?: boolean
+  medium?: boolean
 }
 
-export function Button({ title, ...rest }: ButtonIconProps) {
+export function Button({ title, outline, medium, ...rest }: ButtonIconProps) {
   return (
     <RectButton
-      style={styles.container}
+      style={[ medium ? styles.medium : styles.container]}
       { ...rest }
     >
 
